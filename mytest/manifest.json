@@ -1,0 +1,20 @@
+{
+  "name":"copy_link",
+  "version":"1.0.0",
+  "description": "Chrome Extension Example for manipulating DOM.",
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"]
+  }],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "Title Changer"
+  },
+  "permissions": [
+   "activeTab", "tabs", "clipboardWrite", "clipboardRead"
+  ],
+  "manifest_version":2
+}
