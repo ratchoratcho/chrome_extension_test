@@ -1,0 +1,3 @@
+- copy_link_for_asana
+-- DOMの操作がcontent.jsからしかできないらしいのでbackground.jsとのやりとり
+-- urlはうまくコピーできるからcontentとbackgroundのやりとりがうまくいってない(undifinedになる)
