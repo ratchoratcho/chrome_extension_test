@@ -1,7 +1,7 @@
 chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.sendMessage(tab.id, {
-      command: "change_title",
-      title: "hoge"
+      command: "get_task",
+      //title: "hoge"
       //url: tab.url
     },
     function(msg) {
