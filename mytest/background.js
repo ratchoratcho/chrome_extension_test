@@ -14,12 +14,9 @@ function saveToClipboard(str) {
 }
 var task_name;
 chrome.runtime.onMessage.addListener(
-    /*function(request, sender, sendResponse) {
-        saveToClipboard(request.text);*/
 		function(request, sendler, sentResponse) {
 			task_name = request.text;
 		}
-		//}
 );
 
 chrome.browserAction.onClicked.addListener(function(tab) {
