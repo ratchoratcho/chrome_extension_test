@@ -5,14 +5,24 @@ function saveToClipboard(str) {
 
     document.body.appendChild(textArea);
 
-    textArea.value = str;
+    //textArea.value = "[" + str + "]";
+		textArea.value = str;
     textArea.select();
     document.execCommand("copy");
 
     document.body.removeChild(textArea);
 }
-
+var task_name;
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        saveToClipboard(request.text);
+    /*function(request, sender, sendResponse) {
+        saveToClipboard(request.text);*/
+		function(request, sendler, sentResponse) {
+			task_name = request.text;
+		}
+		//}
+);
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+    var answer = "[" + task_name + "]" + "(" + tab.url　+ ")";
+		saveToClipboard(answer);
 });
