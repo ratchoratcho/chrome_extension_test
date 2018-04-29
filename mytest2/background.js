@@ -14,13 +14,15 @@ function saveToClipboard(str) {
 }
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-	chrome.runtime.sendMessage({
-		text : "active content.js"
-	});
+
+	chrome.tabs.sendMessage(tab.id, {text : "active content.js"} );
+
 	chrome.runtime.onMessage.addListener(
 			function(request, sendler, sentResponse) {
 				var answer = "[" + request.text + "]" + "(" + tab.url + ")";
+				cosole.log("bbb");
 				saveToClipboard(answer);
+				return true;
 			}
 	);
 });

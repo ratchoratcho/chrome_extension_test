@@ -6,9 +6,23 @@ chrome.runtime.onMessage.addListener(
 			var content_title_slice1 = content_title.slice(26, -8);
 			//タスク名だけ抽出(余分な部分を覗く)
 
-
-			chrome.runtime.sendMessage({
-				text : content_title_slice1
-			});
+			chrome.runtime.sendMessage({ text : content_title_slice1 });
+			return true;
 		}
 );
+
+
+/*var content_title;
+var content_title_slice1;
+
+chrome.runtime.onMessage.addListener(
+	function(request, sendler, sentMessage){
+		content_title = document.getElementsByTagName('title')[0].textContent;
+		content_title_slice1 = content_title.slice(26, -8);
+	}
+)
+
+chrome.runtime.sendMessage({
+	text : content_title_slice1
+});
+*/
