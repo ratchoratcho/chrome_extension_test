@@ -10,19 +10,3 @@ chrome.runtime.onMessage.addListener(
 			return true;
 		}
 );
-
-
-/*var content_title;
-var content_title_slice1;
-
-chrome.runtime.onMessage.addListener(
-	function(request, sendler, sentMessage){
-		content_title = document.getElementsByTagName('title')[0].textContent;
-		content_title_slice1 = content_title.slice(26, -8);
-	}
-)
-
-chrome.runtime.sendMessage({
-	text : content_title_slice1
-});
-*/
