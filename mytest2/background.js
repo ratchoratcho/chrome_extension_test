@@ -1,8 +1,5 @@
 function saveToClipboard(str) {
-    // copy 用に textareaを作る
     var textArea = document.createElement("textarea");
-    textArea.style.cssText = "position:absolute;left:-100%";
-
     document.body.appendChild(textArea);
 
 		textArea.value = str;
