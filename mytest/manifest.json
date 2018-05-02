@@ -1,7 +1,7 @@
 {
   "name":"mytest",
   "version":"1.0.0",
-  "description": "Chrome Extension Example for manipulating DOM.",
+  "description": "copy link as markdown only for asana",
   "content_scripts": [{
     "matches": ["https://app.asana.com/*"],
     "js": ["content.js"]

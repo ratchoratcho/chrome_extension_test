@@ -14,7 +14,10 @@
     "default_title": "mytest2"
   },
   "permissions": [
-   "activeTab", "tabs", "clipboardWrite", "clipboardRead"
+   "activeTab", "clipboardRead"
   ],
-  "manifest_version":2
+  "manifest_version":2,
+  "icons": {
+    "128": "for_asana.png"
+  }
 }

@@ -13,13 +13,13 @@ function saveToClipboard(str) {
 }
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-	chrome.tabs.sendMessage(tab.id, {text : "active content.js"} );
+	  chrome.tabs.sendMessage(tab.id, {text : "active content.js"} );
 });
 
 chrome.runtime.onMessage.addListener(
 		function(request, sender, sentResponse) {
-			var answer = "[" + request.text + "]" + "(" + sender.tab.url + ")";
-			saveToClipboard(answer);
-			return true;
+			   var answer = "[" + request.text + "]" + "(" + sender.tab.url + ")";
+			   saveToClipboard(answer);
+			   return true;
 		}
 )
