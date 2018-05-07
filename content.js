@@ -6,7 +6,7 @@ chrome.runtime.onMessage.addListener(
 				var header_name = document.getElementsByClassName('PageHeaderStructure-title')[0].textContent;
 				//ヘッダー名(プロジェクト名など)を取得
 
-				var task_name = content_title.replace('●', '').replace(header_name, '').replace(' - Asana', '').replace('  - ', '');
+				var task_name = content_title.replace('●', '').replace(header_name, '').replace(' - Asana', '').replace(' - ', '');
 				//必要な部分だけ残す
 
 				chrome.runtime.sendMessage({ text : task_name });
