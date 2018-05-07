@@ -1,6 +1,6 @@
 {
   "name":"Copy link as markdown only for asana",
-  "version":"1.0.0",
+  "version":"1.0.1",
   "description": "copy only task name on asana as markdown",
   "content_scripts": [{
     "matches": ["https://app.asana.com/*"],
