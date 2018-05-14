@@ -1,8 +1,8 @@
 function saveToClipboard(str) {
     var textArea = document.createElement("textarea");
     document.body.appendChild(textArea);
-
-		textArea.value = str;
+	
+	textArea.value = str;
     textArea.select();
     document.execCommand("copy");
 
