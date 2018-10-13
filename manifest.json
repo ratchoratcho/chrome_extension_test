@@ -1,6 +1,6 @@
 {
   "name":"Link converter for Asana",
-  "version":"1.1.1",
+  "version":"1.1.2",
   "description": "copy task name on asana as markdown",
   "content_scripts": [{
     "matches": ["https://app.asana.com/*"],

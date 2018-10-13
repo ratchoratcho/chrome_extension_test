@@ -1,20 +1,41 @@
 chrome.runtime.onMessage.addListener(
 	function(request, sendler, sentResponse) {
-		const mypage_title_class_name = "TopbarPageHeaderStructure-title";
-		let mypage_title_element = document.getElementsByClassName("TopbarPageHeaderStructure-title")[0].textContent;
-
-		//タイトルの名前を取得
-		let content_title = document.getElementsByTagName('title')[0].textContent;
-
-		let task_name = null;
-
-		if (mypage_title_element) {
-			task_name = content_title.replace('● ', '').replace(mypage_title_element, '').replace(' - Asana', '').replace(' - ', '');
-		} else {
-			task_name = content_title.replace('● ', '').replace("Search", '').replace(' - Asana', '').replace(' - ', '');
+		// チーム名の取得
+		let team_name = null;
+		try {
+			team_name = document.getElementsByClassName("TopbarPageHeaderView-title")[0].textContent;
+		} catch (e) {
+			console.log("cannot fetch team name");
 		}
 
-		chrome.runtime.sendMessage({ text : task_name });
+		// プロジェクト名の取得
+		let project_name = null;
+		try {
+			project_name = document.getElementsByClassName("TopbarPageHeaderStructure-title")[0].textContent;
+		} catch(e) {
+			console.log("cannot fecth project name");
+		}
+		
+		// タスク名の取得
+		let task_name = null;
+		try {
+			let taskRowElement = document.getElementsByClassName("ItemRow--highlighted")[0];
+			task_name = taskRowElement.getElementsByClassName('TaskName-input')[0].textContent;
+		} catch(e) {
+			console.log("cannot fecth task name");
+		}
+
+		// リンクテキストの生成
+		let link_text = null;
+		if (task_name) {
+			link_text = task_name;
+		} else if (project_name) {
+			link_text = project_name;
+		} else if (team_name) {
+			link_text = team_name;
+		}
+
+		chrome.runtime.sendMessage({ text : link_text });
 		return true;
 	}
 );
