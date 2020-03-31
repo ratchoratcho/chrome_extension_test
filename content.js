@@ -1,6 +1,7 @@
 
 chrome.runtime.onMessage.addListener(
 	function(request, sendler, sentResponse) {
+
 		// チーム名の取得
 		let team_name = null;
 		try {
@@ -22,7 +23,7 @@ chrome.runtime.onMessage.addListener(
 
 		let page_title = document.getElementsByTagName('title')[0].textContent;
 		if (project_name) {
-			task_name = page_title.replace('● ', '').replace(project_name, '').replace(' - Asana', '').replace(' - ', '');
+			task_name = page_title.replace('● ', '').replace(project_name, '').replace(' - Asana', '').replace(' - ', '').replace('検索', '');
 		}
 
 		// リンクテキストの生成

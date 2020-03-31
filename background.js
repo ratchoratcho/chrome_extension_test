@@ -23,7 +23,9 @@ chrome.runtime.onMessage.addListener(
 		xhr.onload = () => {
 			let shorten_url = xhr.responseText;
 
-			let answer = "[" + request.text + "]" + "(" + shorten_url + ")";
+			let link_text = request.text;
+
+			let answer = "[" + link_text + "]" + "(" + shorten_url + ")";
 			saveToClipboard(answer);
 			return true;
 		};
