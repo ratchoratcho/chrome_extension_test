@@ -21,10 +21,12 @@ chrome.runtime.onMessage.addListener(
 		// タスク名の取得
 		let task_name = null;
 
-		let page_title = document.getElementsByTagName('title')[0].textContent;
-		if (project_name) {
-			task_name = page_title.replace('● ', '').replace(project_name, '').replace(' - Asana', '').replace(' - ', '').replace('検索', '');
+		if (document.getElementsByClassName("simpleTextarea--dynamic simpleTextarea AutogrowTextarea-input").length) {
+			task_name = document.getElementsByClassName("simpleTextarea--dynamic simpleTextarea AutogrowTextarea-input")[0].textContent;
 		}
+
+		// // memo
+		// document.getElementsByClassName("ItemRow ItemRow--highlighted ItemRow--enabled ClickableTaskRow TaskRow TaskRow--highlighted").length
 
 		// リンクテキストの生成
 		let link_text = null;
