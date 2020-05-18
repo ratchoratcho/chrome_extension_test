@@ -20,13 +20,12 @@ chrome.runtime.onMessage.addListener(
 		
 		// タスク名の取得
 		let task_name = null;
-
-		if (document.getElementsByClassName("simpleTextarea--dynamic simpleTextarea AutogrowTextarea-input").length) {
-			task_name = document.getElementsByClassName("simpleTextarea--dynamic simpleTextarea AutogrowTextarea-input")[0].textContent;
+		const selected_tasks = document.getElementsByClassName("ItemRow ItemRow--highlighted ItemRow--enabled ClickableTaskRow TaskRow TaskRow--highlighted");
+		
+		if (selected_tasks.length == 1) {
+			task_name = selected_tasks[0].getElementsByClassName("TaskName-input")[0].textContent;
+		} else {
 		}
-
-		// // memo
-		// document.getElementsByClassName("ItemRow ItemRow--highlighted ItemRow--enabled ClickableTaskRow TaskRow TaskRow--highlighted").length
 
 		// リンクテキストの生成
 		let link_text = null;
