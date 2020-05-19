@@ -17,13 +17,22 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 chrome.runtime.onMessage.addListener(	
 	function(request, sender, sentResponse) {
 
-		let url = "https://is.gd/create.php?format=simple&url=" + sender.tab.url;
+		let task_link = request.task_url;
+
+		let original_url = null;
+		if (task_link) {
+			original_url = task_link;
+		} else {
+			original_url = sender.tab.url;
+		}
+
+		let url = "https://is.gd/create.php?format=simple&url=" + original_url;
 		let xhr = new XMLHttpRequest();
 		xhr.open('GET', url);
 		xhr.onload = () => {
 			let shorten_url = xhr.responseText;
 
-			let link_text = request.text;
+			let link_text = request.text;			
 
 			let answer = "[" + link_text + "]" + "(" + shorten_url + ")";
 			saveToClipboard(answer);

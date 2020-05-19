@@ -18,13 +18,30 @@ chrome.runtime.onMessage.addListener(
 			console.log("cannot fecth project name");
 		}
 		
-		// タスク名の取得
+		// タスク名の取得 (My Task)
+		// TODO: マイタスク内のドキュメント取得がうまく行かない
 		let task_name = null;
-		const selected_tasks = document.getElementsByClassName("ItemRow ItemRow--highlighted ItemRow--enabled ClickableTaskRow TaskRow TaskRow--highlighted");
-		
-		if (selected_tasks.length == 1) {
-			task_name = selected_tasks[0].getElementsByClassName("TaskName-input")[0].textContent;
-		} else {
+
+		let selected_tasks = document.getElementsByClassName("TaskRow TaskRow--highlighted");
+		console.log(document.getElementsByClassName("TaskRow TaskRow--highlighted"));
+		// console.log(selected_tasks[0].getElementsByTagName("textarea")[0].textContent);
+		try {
+			task_name = selected_tasks[0].getElementsByClassName("TaskName-input")[0].textContent;			
+		} catch(e) {
+			console.log("cannot fecth my task name");
+		}
+
+		// タスク名の取得
+		let selected_tasks2 = document.getElementsByClassName("SpreadsheetCell--isHighlighted SpreadsheetCell--withShadedBackground SpreadsheetCell--withoutLeftBorder SpreadsheetCell SpreadsheetGridTaskNameCell SpreadsheetTaskRow-nameCell");
+		let task_link = null;
+
+		try {
+			task_name = selected_tasks2[0].getElementsByTagName("textarea")[0].textContent;
+			let task_id = selected_tasks2[0].getElementsByTagName("textarea")[0].id.replace("Pot.","").split("_");
+			task_link = "https://app.asana.com/0/" + task_id[0] + "/" + task_id[2] + "/f";
+			console.log(task_link);
+		} catch(e) {
+			console.log("cannot fecth task name");
 		}
 
 		// リンクテキストの生成
@@ -37,7 +54,7 @@ chrome.runtime.onMessage.addListener(
 			link_text = "**```" + team_name + "```**";
 		}
 
-		chrome.runtime.sendMessage({ text : link_text });
+		chrome.runtime.sendMessage({ text : link_text, task_url: task_link });
 		return true;
 	}
 );
