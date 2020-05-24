@@ -17,7 +17,9 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 chrome.runtime.onMessage.addListener(	
 	function(request, sender, sentResponse) {
 
-		let task_link = request.task_url;
+		let md_link = request[0]
+
+		let task_link = md_link.url;
 
 		let original_url = null;
 		if (task_link) {
@@ -32,7 +34,7 @@ chrome.runtime.onMessage.addListener(
 		xhr.onload = () => {
 			let shorten_url = xhr.responseText;
 
-			let link_text = request.text;			
+			let link_text = md_link.title;			
 
 			let answer = "[" + link_text + "]" + "(" + shorten_url + ")";
 			saveToClipboard(answer);
