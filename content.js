@@ -20,6 +20,10 @@ chrome.runtime.onMessage.addListener(
 		
 		// タスク名の取得 (My Task)
 		// TODO: マイタスク内のドキュメント取得がうまく行かない
+
+		// memo: task in my taskの種類
+		// ItemRow, ItemRow--highlighted(唯一), ItemRow--focused
+
 		let task_name = null;
 		let task_link = null;
 
@@ -32,7 +36,7 @@ chrome.runtime.onMessage.addListener(
 		}
 
 		// タスク名の取得
-		let selected_tasks2 = document.getElementsByClassName("SpreadsheetCell--isHighlighted SpreadsheetCell--withShadedBackground SpreadsheetCell--withoutLeftBorder SpreadsheetCell SpreadsheetGridTaskNameCell SpreadsheetTaskRow-nameCell");
+		let selected_tasks2 = document.getElementsByClassName("SpreadsheetRow SpreadsheetRow--withShadedBackground");
 
 		try {
 			task_name = selected_tasks2[0].getElementsByTagName("textarea")[0].textContent;
@@ -52,7 +56,7 @@ chrome.runtime.onMessage.addListener(
 		} else if (team_name) {
 			link_text = "**```" + team_name + "```**";
 		}
-
+ 
 		chrome.runtime.sendMessage({ text : link_text, task_url: task_link });
 		return true;
 	}
