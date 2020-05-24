@@ -28,33 +28,32 @@ chrome.runtime.onMessage.addListener(
 
 			let prefix = null;
 			if (request.length > 1) {
-				prefix = "- [ ] ";
+				task_prefix = "- [ ] ";
 			} else {
-				prefix = "";
+				task_prefix = "";
 			}
 
-			task_array.push(prefix + "[" + task_name + "]" + "(" + task_url + ")");
+			let gd_url = "https://is.gd/create.php?format=simple&url=" + task_url;
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', gd_url);
+			xhr.onload = () => {
+				let shorten_url = xhr.responseText;
+				let answer = task_prefix + "[" + task_name + "]" + "(" + shorten_url + ")";
+				
+				task_array.push(answer);
+
+				if (task_array.length == request.length) {
+					saveToClipboard(task_array.join("\n"));
+				}
+				
+				return true;
+			};
+			  xhr.onerror = () => {
+				console.log("error!");
+				return false;
+			};
+			xhr.send();
 		}
-
-		saveToClipboard(task_array.join("\n"));
-
-		// let url = "https://is.gd/create.php?format=simple&url=" + original_url;
-		// let xhr = new XMLHttpRequest();
-		// xhr.open('GET', url);
-		// xhr.onload = () => {
-		// 	let shorten_url = xhr.responseText;
-
-		// 	let link_text = md_link.title;			
-
-		// 	let answer = "[" + link_text + "]" + "(" + shorten_url + ")";
-		// 	saveToClipboard(answer);
-		// 	return true;
-		// };
-		//   xhr.onerror = () => {
-		// 	console.log("error!");
-		// 	return false;
-		// };
-		// xhr.send();
 	}
 )
 
