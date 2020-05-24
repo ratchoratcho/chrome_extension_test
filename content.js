@@ -20,11 +20,11 @@ chrome.runtime.onMessage.addListener(
 		
 		// タスク名の取得
 		let tasks = [];
-		let temp_class = ["ItemRow--highlighted", "ItemRow--focused", "SpreadsheetRow SpreadsheetRow--withShadedBackground"];
+		let class_names = ["ItemRow--highlighted", "ItemRow--focused", "SpreadsheetRow SpreadsheetRow--withShadedBackground"];
 
 		// タスク名の取得
 		for (var j=0; j<3; j++) {
-			let selected_tasks = document.getElementsByClassName(temp_class[j]);
+			let selected_tasks = document.getElementsByClassName(class_names[j]);
 
 			for (var i=0; i<selected_tasks.length; i++) { 
 				let task_name = null;
@@ -48,10 +48,10 @@ chrome.runtime.onMessage.addListener(
 			md_links = tasks;
 		} else if (project_name) {
 			let link_text = "**" + project_name + "**";
-			md_links = [{ title : link_text, url: task_link }];
+			md_links = [{ title : link_text, url: null }];
 		} else if (team_name) {
 			let link_text = "**```" + team_name + "```**";
-			md_links = [{ title : link_text, url: task_link }];
+			md_links = [{ title : link_text, url: null }];
 		}
 		
 		chrome.runtime.sendMessage(md_links);
