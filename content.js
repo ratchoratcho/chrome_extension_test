@@ -21,24 +21,23 @@ chrome.runtime.onMessage.addListener(
 		// タスク名の取得 (My Task)
 		// TODO: マイタスク内のドキュメント取得がうまく行かない
 		let task_name = null;
+		let task_link = null;
 
-		let selected_tasks = document.getElementsByClassName("TaskRow TaskRow--highlighted");
-		console.log(document.getElementsByClassName("TaskRow TaskRow--highlighted"));
-		// console.log(selected_tasks[0].getElementsByTagName("textarea")[0].textContent);
+		let selected_tasks3 = document.getElementsByClassName("ItemRow ItemRow--focused"); // ItemRow--highlighted
+
 		try {
-			task_name = selected_tasks[0].getElementsByClassName("TaskName-input")[0].textContent;			
+			task_name = selected_tasks3[0].getElementsByTagName("textarea")[0].textContent;			
 		} catch(e) {
 			console.log("cannot fecth my task name");
 		}
 
 		// タスク名の取得
 		let selected_tasks2 = document.getElementsByClassName("SpreadsheetCell--isHighlighted SpreadsheetCell--withShadedBackground SpreadsheetCell--withoutLeftBorder SpreadsheetCell SpreadsheetGridTaskNameCell SpreadsheetTaskRow-nameCell");
-		let task_link = null;
 
 		try {
 			task_name = selected_tasks2[0].getElementsByTagName("textarea")[0].textContent;
-			let task_id = selected_tasks2[0].getElementsByTagName("textarea")[0].id.replace("Pot.","").split("_");
-			task_link = "https://app.asana.com/0/" + task_id[0] + "/" + task_id[2] + "/f";
+			let task_id = selected_tasks2[0].getElementsByTagName("textarea")[0].id.split(".","")[1].split("_");
+			task_link = "https://app.asana.com/0/" + task_id[0] + "/" + task_id[2] + "";
 			console.log(task_link);
 		} catch(e) {
 			console.log("cannot fecth task name");
